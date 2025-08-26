@@ -23,7 +23,7 @@ data Dir = Norte | Sur | Este | Oeste deriving Show
 
 opuesto :: Dir -> Dir
 -- Dada una dirección devuelve su opuesta
-opusto Norte = Sur
+opuesto Norte = Sur
 opuesto Este = Oeste
 opuesto Sur = Norte
 opuesto Oeste = Este
@@ -43,7 +43,7 @@ siguiente :: Dir -> Dir
 siguiente Norte = Este
 siguiente Este = Sur
 siguiente Sur = Oeste
-siguiente Oeste = Norte
+siguiente Oeste = error "No hay siguiente a oeste"
 
 {-
 Definir el tipo de dato DiaDeSemana, con las alternativas Lunes, Martes, Miércoles, Jueves,
@@ -108,7 +108,7 @@ implica :: Bool -> Bool -> Bool
 -- Esta función NO deb e realizar doble pattern matching.
 -- Nota: no viene implementada en Haskell.
 implica True b = b
-implica _    _ = False 
+implica _    _ = True
 
 yTambien :: Bool -> Bool -> Bool
 -- Dados dos booleanos si ambos son True devuelve True, sino devuelve False.
