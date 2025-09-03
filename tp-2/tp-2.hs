@@ -32,7 +32,8 @@ aplanar [] = []
 aplanar (xs:xss) = xs ++ aplanar xss
 
 pertenece :: Eq a => a -> [a] -> Bool
--- Dados un elemento e y una lista xs devuelve True si existe un elemento en xs que sea igual
+-- Dados un elemento e y una lista xs devuelve True si existe un elemento en xs que sea igual}
+pertenece _ [] = False
 pertenece a (x:xs) = a == x || pertenece a xs
 
 apariciones :: Eq a => a -> [a] -> Int
@@ -69,7 +70,7 @@ agregarAlFinal (x:xs) e = x : agregarAlFinal xs e
 agregar :: [a] -> [a] -> [a]
 -- Dadas dos listas devuelve la lista con todos los elementos de la primera lista y todos los
 -- elementos de la segunda a continuación. Definida en Haskell como (++).
-agregar [] ys = []
+agregar [] ys = ys
 agregar (x:xs) ys = x : agregar xs ys
 
 
@@ -83,13 +84,21 @@ zipMaximos :: [Int] -> [Int] -> [Int]
 --Dadas dos listas de enteros, devuelve una lista donde el elemento en la p osición n es el
 --máximo entre el elemento n de la primera lista y de la segunda lista, teniendo en cuenta que
 --las listas no necesariamente tienen la misma longitud.
-zipMaximos _ _ = error "falta implementar"
-
+zipMaximos [] ys = ys
+zipMaximos xs [] = xs
+zipMaximos (x:xs) (y:ys) = if (x > y)
+                              then x : zipMaximos xs ys
+                              else y : zipMaximos xs ys
 
 
 elMinimo :: Ord a => [a] -> a
--- Dada una lista devuelve el mínimo
-elMinimo _ = error "falta implementar"
+elMinimo []     = error "Lista vacía"
+elMinimo [x]    = x
+elMinimo (x:xs) = minimo x (elMinimo xs)
+
+minimo :: Ord a => a -> a -> a
+minimo x y = if x <= y then x else y
+
 
 --Defina las siguientes funciones utilizando recursión sobre números enteros, salvo que se indique
 --lo contrario:
